@@ -1,0 +1,14 @@
+﻿# Compiled binaries
+*.exe
+*.o
+*.out
+
+# Generated results (each algo writes here)
+results/
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# VSCode
+.vscode/
