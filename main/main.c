@@ -117,7 +117,7 @@ int main(void)
         return 1;
     }
 
-    fprintf(fichierSortie, "Nombre,Temps (secondes)\n");
+    fprintf(fichierSortie, "Nombre,Temps (microsecondes)\n");
 
     // Pour A3 et A4, 10000 iterations car O(sqrt(N)) est tres rapide
     // Pour A1 et A2, 1 iteration suffit
@@ -138,13 +138,14 @@ int main(void)
         }
         fin = clock();
 
-        tempsExecution = ((double)(fin - debut) / CLOCKS_PER_SEC) / iterations;
+        // Calcul du temps directement en microsecondes (1 s = 1 000 000 us)
+        tempsExecution = (((double)(fin - debut) / CLOCKS_PER_SEC) / iterations) * 1000000.0;
 
-        fprintf(fichierSortie, "%lld,%.10f\n", N, tempsExecution);
+        fprintf(fichierSortie, "%lld,%.3f\n", N, tempsExecution);
         fflush(fichierSortie); // Sauvegarde immediate sur disque
 
         compteur++;
-        printf(" Termine en %.6f s\n", tempsExecution);
+        printf(" Termine en %.3f us\n", tempsExecution);
 
         fscanf(fichierEntree, ",");
     }
