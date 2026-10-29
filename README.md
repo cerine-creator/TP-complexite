@@ -23,6 +23,28 @@ Les fichiers de test contiennent des nombres (un par ligne) au format `.csv` :
 
 > **Note :** Si la commande `gcc` n'est pas reconnue dans votre terminal, ouvrez un nouveau terminal ou utilisez le chemin direct `C:\msys64\mingw64\bin\gcc.exe`.
 
+### 🌟 Programme Unifié (Recommandé - Tous les Algorithmes A1, A2, A3, A4)
+
+Le dossier `main/` regroupe l'ensemble des 4 algorithmes dans un seul programme avec détection automatique intelligente des chemins (`data/` et `results/`).
+
+#### Étape 1 : Compiler
+```powershell
+gcc main/main.c -o main/main.exe -lm
+```
+
+#### Étape 2 : Exécuter
+Depuis la racine du projet ou depuis le dossier `main` :
+```powershell
+.\main\main.exe
+```
+
+#### Étape 3 : Utilisation
+1. Entrez le nom du fichier (ex: `Random100.csv` ou simplement `Random100`).
+2. Choisissez l'algorithme à exécuter (1 pour A1, 2 pour A2, 3 pour A3, 4 pour A4, ou 5 pour lancer les 4 à la suite).
+3. Les résultats sont automatiquement enregistrés dans le dossier `results/`.
+
+---
+
 ### 1. Algorithme 2 (A2 - Méthode Moitié)
 
 #### Étape 1 : Compiler

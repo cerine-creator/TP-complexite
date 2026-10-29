@@ -3,10 +3,6 @@
 *.o
 *.out
 
-# Generated results (each algo writes here)
-results/*
-!results/.gitkeep
-!results/Random100.csv_A4_resultat.csv
 
 # Windows
 Thumbs.db
