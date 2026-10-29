@@ -74,9 +74,9 @@ int main(void)
 {
     FILE *fichierEntree;
     FILE *fichierSortie;
-    char nomfich[50];
-    char nomEntree[100];
-    char nomSortie[100];
+    char nomfich[100];
+    char nomEntree[150];
+    char nomSortie[150];
     long long N;
     long compteur = 0;
     clock_t debut, fin;
@@ -84,7 +84,13 @@ int main(void)
     int choix;
 
     printf("Entrez le nom du fichier : ");
-    scanf("%49s", nomfich);
+    scanf("%99s", nomfich);
+
+    // Ajoute automatiquement .csv si oublie par l'utilisateur
+    if (strstr(nomfich, ".csv") == NULL)
+    {
+        strcat(nomfich, ".csv");
+    }
 
     printf("Choisissez l'algorithme (1: A1, 2: A2, 3: A3, 4: A4) : ");
     scanf("%d", &choix);
