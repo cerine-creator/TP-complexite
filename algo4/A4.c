@@ -63,6 +63,9 @@ int main(void)
 
     while (fscanf(fichierEntree, "%lld", &N) == 1)
     {
+        printf("Traite [%ld] : %lld en cours...", compteur + 1, N);
+        fflush(stdout);
+
         int iterations = 10000;
         debut = clock();
         for (int k = 0; k < iterations; k++)
@@ -74,7 +77,10 @@ int main(void)
         tempsExecution = ((double)(fin - debut) / CLOCKS_PER_SEC) / iterations;
 
         fprintf(fichierSortie, "%lld,%.10f\n", N, tempsExecution);
+        fflush(fichierSortie); // Sauvegarde immediate sur disque
+
         compteur++;
+        printf(" Termine en %.6f s\n", tempsExecution);
 
         fscanf(fichierEntree, ","); // try to skip comma (if CSV input)
     }

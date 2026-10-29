@@ -57,16 +57,22 @@ int main(void)
     
     while (fscanf(fichierEntree, "%lld", &N) == 1)
     {
-       debut = clock();
-       estPremier2(N);
-       fin = clock();
+        printf("Traite [%ld] : %lld en cours...", compteur + 1, N);
+        fflush(stdout);
 
-       tempsExecution = (double)(fin - debut) / CLOCKS_PER_SEC ;
+        debut = clock();
+        estPremier2(N);
+        fin = clock();
 
-       fprintf(fichierSortie,"%lld,%.10f\n", N, tempsExecution);
+        tempsExecution = (double)(fin - debut) / CLOCKS_PER_SEC;
+
+        fprintf(fichierSortie, "%lld,%.10f\n", N, tempsExecution);
+        fflush(fichierSortie); // Sauvegarde immediate sur disque
+
         compteur++;
+        printf(" Termine en %.4f s\n", tempsExecution);
 
-       fscanf(fichierEntree,",");
+        fscanf(fichierEntree, ",");
     }
 
     fclose(fichierEntree);
