@@ -84,13 +84,10 @@ int main(void)
     int choix;
 
     printf("Entrez le nom du fichier : ");
-    scanf("%99s", nomfich);
+    scanf("%49s", nomfich);
 
-    // Ajoute automatiquement .csv si oublie par l'utilisateur
-    if (strstr(nomfich, ".csv") == NULL)
-    {
-        strcat(nomfich, ".csv");
-    }
+    char *p = strstr(nomfich, ".csv");
+    if (p) *p = '\0';
 
     printf("Choisissez l'algorithme (1: A1, 2: A2, 3: A3, 4: A4) : ");
     scanf("%d", &choix);
@@ -101,12 +98,12 @@ int main(void)
         return 1;
     }
 
-    sprintf(nomEntree, "data/%s", nomfich);
+    sprintf(nomEntree, "data/%s.csv", nomfich);
     fichierEntree = fopen(nomEntree, "r");
 
     if (fichierEntree == NULL)
     {
-        printf("Erreur d'ouverture du fichier dans data/%s\n", nomfich);
+        printf("Erreur d'ouverture du fichier dans data/%s.csv\n", nomfich);
         return 1;
     }
 
