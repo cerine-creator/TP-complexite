@@ -1,0 +1,12 @@
+# Compiled binaries
+*.exe
+*.o
+*.out
+
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# VSCode
+.vscode/
