@@ -80,7 +80,8 @@ int main(void)
     long long N;
     long compteur = 0;
     clock_t debut, fin;
-    double tempsExecution;
+    double tempsMicrosecondes;
+    double tempsSecondes;
     int choix;
 
     printf("Entrez le nom du fichier : ");
@@ -117,11 +118,11 @@ int main(void)
         return 1;
     }
 
-    fprintf(fichierSortie, "Nombre,Temps (microsecondes)\n");
+    fprintf(fichierSortie, "Nombre,Temps (secondes)\n");
 
     // Pour A3 et A4, 10000 iterations car O(sqrt(N)) est tres rapide
-    // Pour A1 et A2, 1 iteration suffit
-    int iterations = (choix >= 3) ? 10000 : 1;
+    // Pour A1 et A2, utiliser 100 iterations ; A3 et A4 utilisent 10000 iterations.
+    int iterations = (choix >= 3) ? 10000 : 100;
 
     while (fscanf(fichierEntree, "%lld", &N) == 1)
     {
@@ -138,14 +139,15 @@ int main(void)
         }
         fin = clock();
 
-        // Calcul du temps directement en microsecondes (1 s = 1 000 000 us)
-        tempsExecution = (((double)(fin - debut) / CLOCKS_PER_SEC) / iterations) * 1000000.0;
+        // Mesure en microsecondes, puis conversion en secondes pour les resultats.
+        tempsMicrosecondes = (((double)(fin - debut) / CLOCKS_PER_SEC) / iterations) * 1000000.0;
+        tempsSecondes = tempsMicrosecondes / 1000000.0;
 
-        fprintf(fichierSortie, "%lld,%.3f\n", N, tempsExecution);
+        fprintf(fichierSortie, "%lld,%.9f\n", N, tempsSecondes);
         fflush(fichierSortie); // Sauvegarde immediate sur disque
 
         compteur++;
-        printf(" Termine en %.3f us\n", tempsExecution);
+        printf(" Termine en %.9f s\n", tempsSecondes);
 
         fscanf(fichierEntree, ",");
     }

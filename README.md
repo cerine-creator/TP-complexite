@@ -22,7 +22,7 @@ Depuis la racine du projet :
 #### Étape 3 : Utilisation
 1. Entrez le nom du fichier (ex: `Random100.csv` ou simplement `Random100`).
 2. Choisissez l'algorithme à exécuter (1 pour A1, 2 pour A2, 3 pour A3, 4 pour A4).
-3. Les résultats sont enregistrés directement dans le dossier `results/` avec les temps en microsecondes.
+3. Les résultats sont enregistrés directement dans le dossier `results/` avec les temps en secondes. Le temps est mesuré en microsecondes puis converti en secondes pour l'affichage.
 
 ---
 
@@ -31,9 +31,8 @@ Depuis la racine du projet :
 Chaque exécution génère un fichier CSV contenant deux colonnes :
 ```csv
 Nombre,Temps (secondes)
-406697,0.0000010000
-932051,0.0000020000
+406697,0.000001000
+932051,0.000002000
 ...
 ```
 Ces résultats permettent de tracer les courbes de temps et de comparer directement les performances de chaque algorithme.
-
