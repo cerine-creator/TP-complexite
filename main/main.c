@@ -86,7 +86,7 @@ int main(void)
     printf("Entrez le nom du fichier : ");
     scanf("%49s", nomfich);
 
-    char *p = strstr(nomfich, ".csv");
+    char *p = strstr(nomfich, ".txt");
     if (p) *p = '\0';
 
     printf("Choisissez l'algorithme (1: A1, 2: A2, 3: A3, 4: A4) : ");
@@ -98,12 +98,12 @@ int main(void)
         return 1;
     }
 
-    sprintf(nomEntree, "data/%s.csv", nomfich);
+    sprintf(nomEntree, "data/%s.txt", nomfich);
     fichierEntree = fopen(nomEntree, "r");
 
     if (fichierEntree == NULL)
     {
-        printf("Erreur d'ouverture du fichier dans data/%s.csv\n", nomfich);
+        printf("Erreur d'ouverture du fichier dans data/%s.txt\n", nomfich);
         return 1;
     }
 
