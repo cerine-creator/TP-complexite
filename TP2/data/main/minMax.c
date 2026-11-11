@@ -36,86 +36,68 @@ void MaxEtMinA(int T[], int n, int *max, int *min, long *nb_comparaisons)
 
 
 
-void MaxEtMinBVersion2(int T[], int n, int *max, int *min, long *nb_comparaisons)
+void MaxEtMinBVersion2(int T[], int n, int *max_val, int *min_val, long *nb_comparaisons)
 {
-    //hadi la variable ta7sab ch7al min mara comparina la case i mea i+1 
     *nb_comparaisons = 0;
-    if (n <= 0)
-    //ida tableau vide akhroj
-        return;
+    if (n <= 0) return;
 
-    int i = 0;
+    int end = n - 1;
 
- 
-    if (n % 2 == 0)
+    // Phase 1 : Comparer par paire et placer les plus grands dans les indices pairs, les plus petits dans les impaires
+   int i ;
+    for ( i = 0; i < end; i += 2)
     {
-        // ida kanat la taille nta3 tableau paire 
+
         (*nb_comparaisons)++;
-        if (T[0] > T[1])
+        if (T[i] < T[i + 1])
         {
-            // ida kan element 0 kbir 3la lowal alors bayna bli 0 ywali max 
-            *max = T[0];
-            *min = T[1];
+            // On échange pour que le plus grand soit à l'indice pair (T[i]) 
+            // et le plus petit à l'indice impair (T[i+1])
+            int temp = T[i];
+            T[i] = T[i + 1];
+            T[i + 1] = temp;
         }
-        else
-        {
-            // el 3aks sa7i7
-            *max = T[1];
-            *min = T[0];
-        }
-        i = 2;
-         // nabdaw la boucle pour i = > 2 haka
     }
-    //
-    else
-    {
-        //ida kanat la taille nta3 tableau impaire+
-        //vu que tableau impaire donc l'element 0 ywali max w min
-        *max = T[0];
-        *min = T[0];
-        // vu que tableau impaire donc l'element 0 ywali max w min 
-        // w biensure que index ntea la boucle ywali 1 haka bach nabdaw la boucle men 1
-        i = 1;
-    }
+    //les elment min files cases ipmaire w les elment max files cases paire
 
-
-    while (i < n - 1)
+    // Phase 2 : Chercher le minimum parmi tous les plus petits (cases impaires)
+    // et le maximum parmi tous les plus grands (cases paires)
+    int min = T[1];
+    int max = T[0];
+    
+    for (i = 2; i < end; i += 2)
     {
-        int local_max, local_min;
-         // bon dirna 2 variabnle local bach ncompariwhom m3a max w min nta3na
-  
-         // donc si i kanat paire , nb_comparaisons++ ykon  2 w (4 6 8 10 )  mais  ida kanat impaire nb_comparaisons++ tkon 1 w tala3 (3 5 7 9 )
         (*nb_comparaisons)++;
-        if (T[i] > T[i + 1])
+        if (T[i] > max)
         {
-            local_max = T[i];
-            local_min = T[i + 1];
-
+            max = T[i];
         }
-        else
+
+        (*nb_comparaisons)++;
+        if (T[i + 1] < min)
         {
-            local_max = T[i + 1];
-            local_min = T[i];
-        } 
-        
+            min = T[i + 1];
+        }
+    }
+
+    // Phase 3 : Traiter le cas où la taille du tableau est impaire (le dernier élément seul)
+    if (n % 2 == 1)
+    {
+        (*nb_comparaisons)++;
+        if (T[n - 1] < min)
+        {
+            min = T[n - 1];
+        }
         
         (*nb_comparaisons)++;
-        if (local_max > *max)
+        if (T[n - 1] > max)
         {
-            *max = local_max;
+            max = T[n - 1];
         }
-
-        
-        (*nb_comparaisons)++;
-        if (local_min < *min)
-        {
-            *min = local_min;
-        }
-
-        i += 2; 
-        // pour paire on avance de 2 ( 2 , 4 , 6 , 8 , 10 ) POUR impaire on avance de 2 ( 1 , 3 , 5 , 7 , 9 )
-        //haka ndamno nshado deux couple 9rab w ntestiw binathom w ncompariwom m3a max w min nta3na 
     }
+
+    *max_val = max;
+    *min_val = min;
 }
 
 typedef void (*MinMaxFn)(int[], int, int*, int*, long*); 
